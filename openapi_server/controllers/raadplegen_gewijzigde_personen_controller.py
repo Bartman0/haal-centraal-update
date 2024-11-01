@@ -62,19 +62,15 @@ def get_gewijzigde_personen(token_info, vanaf=None):  # noqa: E501
     # TODO move data driver to Databricks instead of PostgreSQL
     with connection_pool.connection() as connection:
         with connection.cursor() as cursor:
-            try:
-                cursor.execute("CREATE TEMP table bsn_selectie(burgerservicenummer bigint, CONSTRAINT bsn_selectie_pkey PRIMARY KEY (burgerservicenummer))")
-                with cursor.copy("COPY bsn_selectie(burgerservicenummer) FROM STDIN") as copy:
-                    for bsn in bsn_selectie:
-                        copy.write_row((bsn, ))
-                cursor.execute("""
-                    SELECT l.burgerservicenummer FROM bsn_lijst l 
-                    JOIN bsn_selectie s ON s.burgerservicenummer = l.burgerservicenummer
-                    WHERE l.updated_at >= %s
-                    """,
-                    (vanaf, ))
-            except Exception as e:
-                print(e)
+            cursor.execute("CREATE TEMP table bsn_selectie(burgerservicenummer bigint, CONSTRAINT bsn_selectie_pkey PRIMARY KEY (burgerservicenummer))")
+            with cursor.copy("COPY bsn_selectie(burgerservicenummer) FROM STDIN") as copy:
+                for bsn in bsn_selectie:
+                    copy.write_row((bsn, ))
+            cursor.execute("""
+                SELECT l.burgerservicenummer FROM bsn_lijst l 
+                JOIN bsn_selectie s ON s.burgerservicenummer = l.burgerservicenummer
+                WHERE l.updated_at >= %s
+                """, (vanaf, ))
             for record in cursor:
                 response.append(record[0])
         collectie = GewijzigdePersonenHalCollectie(

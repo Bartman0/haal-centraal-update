@@ -15,7 +15,6 @@ ALGORITHM = "HS256"
 
 def decode_token(token):
     try:
-        print(token)
         return jwt.decode(
             token,
             CONFIG.SECRET_KEY,
