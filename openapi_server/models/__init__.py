@@ -1,0 +1,11 @@
+# flake8: noqa
+# import models into model package
+from openapi_server.models.bad_request_foutbericht import BadRequestFoutbericht
+from openapi_server.models.foutbericht import Foutbericht
+from openapi_server.models.gewijzigde_personen_hal_collectie import GewijzigdePersonenHalCollectie
+from openapi_server.models.gewijzigde_personen_hal_collection_links import GewijzigdePersonenHalCollectionLinks
+from openapi_server.models.hal_link import HalLink
+from openapi_server.models.invalid_params import InvalidParams
+from openapi_server.models.volgindicatie import Volgindicatie
+from openapi_server.models.volgindicatie_collectie import VolgindicatieCollectie
+from openapi_server.models.volgindicatie_raadplegen import VolgindicatieRaadplegen
