@@ -25,11 +25,10 @@ De volgende environment variabelen moeten gezet worden:
 
 ## TODO
 
-1. docker-compose config maken om volledig containerized te kunnen testen
-2. database voor wijzigingen op personen losmaken van de database voor volgindicaties opdat deze onafhankelijk kan worden geconfigureerd
-3. testen onder belasting
-4. unittests toevoegen voor het detecteren van regressieproblemen
-5. uitgebreider acceptatietesten
+1. database voor wijzigingen op personen losmaken van de database voor volgindicaties opdat deze onafhankelijk kan worden geconfigureerd
+2. testen onder belasting
+3. unittests toevoegen voor het detecteren van regressieproblemen
+4. uitgebreider acceptatietesten
 
 <br/>
 
@@ -65,7 +64,7 @@ http://localhost:8083/haalcentraal/api/brpupdate/ui/
 Your OpenAPI definition lives here:
 
 ```
-http://localhost:8080/haalcentraal/api/brpupdate/openapi.json
+http://localhost:8083/haalcentraal/api/brpupdate/openapi.json
 ```
 
 To launch the integration tests, use tox:
@@ -84,5 +83,5 @@ To run the server on a Docker container, please execute the following from the r
 docker build -t openapi_server .
 
 # starting up a container
-docker run -p 8080:8080 openapi_server
+docker run -p 8083:8083 openapi_server
 ```
