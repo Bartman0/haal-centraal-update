@@ -23,6 +23,13 @@ De volgende environment variabelen moeten gezet worden:
   1. tokens hoeven niet meer gegenereerd te worden, deze moeten volgen uit authenticatie tegen een application ID in Entra ID
   2. de validatie van de ontvangen tokens moet ook tegen Entra ID worden uitgevoerd; dit houdt in dat de public keys van de application bevraagd moeten worden en nadat de thumbprint is bepaald moet de validiteit op basis van de correcte sleutel worden uitgevoerd
 
+## TODO
+
+1. database voor wijzigingen op personen losmaken van de database voor volgindicaties opdat deze onafhankelijk kan worden geconfigureerd
+2. testen onder belasting
+3. unittests toevoegen voor het detecteren van regressieproblemen
+4. uitgebreider acceptatietesten
+
 <br/>
 
 # OpenAPI generated server
