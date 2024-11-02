@@ -7,20 +7,26 @@ from datetime import datetime, timedelta, timezone
 from random import randrange
 
 import jwt
+from werkzeug.exceptions import Unauthorized
 
 from openapi_server.config import CONFIG
 
 ALGORITHM = "HS256"
+VOLGINDICATIES_ROLE = "benk-brp-volgindicaties"
 
 
 def decode_token(token):
     try:
-        return jwt.decode(
+        token_info = jwt.decode(
             token,
             CONFIG.SECRET_KEY,
             options={"require": ["iss", "iat", "exp", "sub", "roles"]},
             algorithms=[ALGORITHM],
         )
+        if VOLGINDICATIES_ROLE not in token_info["roles"]:
+            logging.error(f"Not authorized to use this API")
+            return None
+        return token_info
     except jwt.DecodeError:
         logging.debug(f"Token decoding error")
         return None

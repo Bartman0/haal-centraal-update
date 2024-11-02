@@ -29,7 +29,7 @@ def init_flask(app: FlaskApp, level=logging.INFO):
 
 
 if __name__ == "__main__":
-    token = auth.encode_token("afnemer_test", ["benk-brp-volgindicaties"])
+    token = auth.encode_token("afnemer_test", [auth.VOLGINDICATIES_ROLE])
     print(token)
     app = init_app()
     flask_app = init_flask(app, logging.DEBUG)
