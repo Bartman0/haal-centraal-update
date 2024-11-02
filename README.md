@@ -25,10 +25,11 @@ De volgende environment variabelen moeten gezet worden:
 
 ## TODO
 
-1. database voor wijzigingen op personen losmaken van de database voor volgindicaties opdat deze onafhankelijk kan worden geconfigureerd
-2. testen onder belasting
-3. unittests toevoegen voor het detecteren van regressieproblemen
-4. uitgebreider acceptatietesten
+1. docker-compose config maken om volledig containerized te kunnen testen
+2. database voor wijzigingen op personen losmaken van de database voor volgindicaties opdat deze onafhankelijk kan worden geconfigureerd
+3. testen onder belasting
+4. unittests toevoegen voor het detecteren van regressieproblemen
+5. uitgebreider acceptatietesten
 
 <br/>
 

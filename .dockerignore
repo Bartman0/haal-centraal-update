@@ -70,3 +70,11 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+postgresql-data
+
+.git
+.venv
+.pytest_cache
+.envrc
+

@@ -66,6 +66,7 @@ target/
 .ipynb_checkpoints
 
 .envrc
+.DS_Store
 
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm

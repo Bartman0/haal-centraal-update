@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16.4
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - "5438:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./postgresql-config/setup_docker.sql:/docker-entrypoint-initdb.d/setup_docker.sql
+    networks:
+      - docker_network
+  api:
+    container_name: brpupdate
+    build: .
+    image: haalcentraal/brp-update
+    depends_on:
+      - postgres
+    ports:
+      - 8083:8083
+    environment:
+      - APP_ENVIRONMENT=development
+      - SQLALCHEMY_DRIVER_DEVELOPMENT=postgresql+psycopg
+      - POSTGRESQL_HOST_DEVELOPMENT=postgres
+      - POSTGRESQL_PORT_DEVELOPMENT=5432
+      - POSTGRESQL_DATABASE_DEVELOPMENT=postgres
+      - POSTGRESQL_USERNAME_DEVELOPMENT=postgres
+      - POSTGRESQL_PASSWORD_DEVELOPMENT=postgres
+      - SECRET_KEY_DEVELOPMENT=secret
+    volumes:
+      - .:/usr/app/src
+    networks:
+      - docker_network
+volumes:
+  db:
+    driver: local
+networks:
+  docker_network:
+    driver: bridge
