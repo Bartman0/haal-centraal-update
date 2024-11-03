@@ -2,6 +2,18 @@
 
 Open source implementatie van de BRP Update API van de RvIG zoals gespecificeerd in https://github.com/BRP-API/Haal-Centraal-BRP-Update-API
 
+## Quickstart
+
+De eenvoudigste manier om de API te starten is door `docker compose up` uit te voeren en naar http://localhost:8083/haalcentraal/api/brpupdate/ui/ te gaan. 
+Vergeet dan niet het Bearer token dat wordt getoond op de console in te voeren bij de autorisatie (het slotje aan de rechterkant). 
+De database is maar minimaal gevuld, en het gegenereerde token is specifiek voor een afnemer gedefinieerd. 
+Door `auth.encode_token(subject, roles=list())` aan te roepen met een ander `subject` (==afnemer_code) kan een token worden gegenereerd voor een andere afnemer. 
+Het script `genereer_token.py` doet precies dat, dus op de command-line kan dat worden gebruikt (`./genereer_token.py <code voor afnemer>`).
+
+Het is eigenlijk de bedoeling deze tokens af te laten hangen van andere IDP's zoals Entra ID.
+
+## Configuratie
+
 De volgende environment variabelen moeten gezet worden:
 
 - APP_ENVIRONMENT={development|production}: een aanduiding van de te gebruiken environment context; vrije waardes die zelf gekozen kunnen worden en doorwerken in de suffix van de overige variabelen
@@ -25,11 +37,11 @@ De volgende environment variabelen moeten gezet worden:
 
 ## TODO
 
-1. docker-compose config maken om volledig containerized te kunnen testen
-2. database voor wijzigingen op personen losmaken van de database voor volgindicaties opdat deze onafhankelijk kan worden geconfigureerd
-3. testen onder belasting
-4. unittests toevoegen voor het detecteren van regressieproblemen
-5. uitgebreider acceptatietesten
+1. het vulscript voor de database uitbreiden met meer data
+1. database voor wijzigingen op personen losmaken van de database voor volgindicaties opdat deze onafhankelijk kan worden geconfigureerd
+2. testen onder belasting
+3. unittests toevoegen voor het detecteren van regressieproblemen
+4. uitgebreider acceptatietesten
 
 <br/>
 
@@ -65,7 +77,7 @@ http://localhost:8083/haalcentraal/api/brpupdate/ui/
 Your OpenAPI definition lives here:
 
 ```
-http://localhost:8080/haalcentraal/api/brpupdate/openapi.json
+http://localhost:8083/haalcentraal/api/brpupdate/openapi.json
 ```
 
 To launch the integration tests, use tox:
@@ -84,5 +96,5 @@ To run the server on a Docker container, please execute the following from the r
 docker build -t openapi_server .
 
 # starting up a container
-docker run -p 8080:8080 openapi_server
+docker run -p 8083:8083 openapi_server
 ```

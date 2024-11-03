@@ -4,10 +4,8 @@ More on JWT tokens: https://jwt.io/
 
 import logging
 from datetime import datetime, timedelta, timezone
-from random import randrange
 
 import jwt
-from werkzeug.exceptions import Unauthorized
 
 from openapi_server.config import CONFIG
 
