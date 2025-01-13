@@ -1,0 +1,1 @@
+export AZURE_ENTRA_TOKEN=$(python3 ./genereer_token.py -s afnemer_test)
